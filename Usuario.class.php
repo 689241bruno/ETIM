@@ -1,0 +1,65 @@
+<?php 
+
+class Usuario{
+    private $id;
+    private $nome;
+    private $senha;
+    private $email;
+    private $pdo;
+
+    function __construct()
+    {
+        $dsn    = "mysql:dbname=usuario;host=localhost";
+        $dbUser = "root";
+        $dbPass = "";
+
+        try{
+            $this->pdo = new PDO($dsn, $dbUser, $dbPass);
+
+        } catch(\Throwable $th) {
+            echo "Error" . $th;
+        }
+    }
+
+    function verificarEmail($email){
+        $sql = "SELECT email FROM usuarios WHERE email = :e";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":e", $email);
+        $stmt->execute();
+
+        $resultado = $stmt->fetch();
+
+        if ($resultado) {
+            return false;
+        } else {
+            return true;
+    }
+    }
+
+    function cadastrarUsuario($nome, $email, $senha) {
+        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:n, :e, :s)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":n", $nome);
+        $stmt->bindValue(":e", $email);
+        $stmt->bindValue(":s", $senha);
+        $stmt->execute();
+    }
+
+    function entrarUsuario($email, $senha){
+        $sql = "SELECT nome, senha FROM usuarios WHERE email = :e";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":e", $email);
+        $stmt->execute();
+
+        $resultado = $stmt->fetch();
+
+        // Verificando a senha
+        if ($resultado && $senha === $resultado['senha']) {
+            return $resultado['nome'];
+        } else {
+            return false;
+        }
+    }
+}
+
+?>
