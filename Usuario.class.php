@@ -83,6 +83,14 @@ class Usuario{
             return false;
         }
     }
+
+    function deletarUsuario($id){
+        $sql = "DELETE FROM usuarios WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        
+    }
 }
 
 ?>
