@@ -33,7 +33,8 @@
 
             if($usuario->entrarUsuario($email, $senha)){
                 $nomeUser = $usuario->entrarUsuario($email, $senha);
-                echo "<script>alert('Seja bem-vindo, $nomeUser');</script>";
+                echo "<script>alert('Seja bem-vindo, $nomeUser');
+                window.location.href = 'pagina-usuarios.php'</script>";
 
             } else {
                 echo "<script>alert('Senha ou email incorreto!');</script>";

@@ -33,7 +33,30 @@ class Usuario{
             return false;
         } else {
             return true;
+        }
     }
+
+    function numLinhas(){
+        $sql = "SELECT * FROM usuarios ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+
+    function pegarInfos($linha){
+        $sql = "SELECT nome, email, id FROM usuarios ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(); 
+        $linhas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $linhaDesejada = $linhas[$linha];
+        $nome = $linhaDesejada['nome'];
+        $email = $linhaDesejada['email'];
+        $id = $linhaDesejada['id'];
+
+        $valores = [$id, $nome, $email];
+
+        return $valores;
     }
 
     function cadastrarUsuario($nome, $email, $senha) {
