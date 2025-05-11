@@ -59,6 +59,18 @@ class Usuario{
         return $valores;
     }
 
+    function pegarInfosComId($id){
+        $sql = "SELECT nome, email FROM usuarios WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute(); 
+        $valores = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nome = $valores['nome'];
+        $email = $valores['email'];
+
+        return $valores;
+    }
+
     function cadastrarUsuario($nome, $email, $senha) {
         $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:n, :e, :s)";
         $stmt = $this->pdo->prepare($sql);
@@ -84,12 +96,21 @@ class Usuario{
         }
     }
 
+    function editarUsuario($nome, $email, $id){
+        $sql = "UPDATE usuarios SET nome = :n, email= :e  WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":n", $nome);
+        $stmt->bindValue(":e", $email);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+    }
+
     function deletarUsuario($id){
         $sql = "DELETE FROM usuarios WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
-        
+
     }
 }
 

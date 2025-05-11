@@ -24,7 +24,7 @@
                     <a href="cadastrar.php" class="btn btn-primary float-end">Adicionar usuário</a>
                 </h4>
             </div>
-            <div class="car-body">
+            <div class="car-body p-3">
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -51,9 +51,10 @@
                             <td><?=$nome?></td>
                             <td><?=$email?></td>
                             <td class="text-center">
-                                <button class="btn btn-warning">editar</button>
+                                <a href="editar.php?id=<?=$id?>" class="btn btn-warning btn-sm" style="margin-right: 10px;"><span class="bi-pencil-fill"  type="submit" name="editar_usuario" value="<?$id?>"></a>
                                 <form action="acoes.php" method="POST" class="d-inline">
-                                    <button  onclick="return confirm('Tem certeza que deseja excluir?')" type="submit" name="delete_usuario" value="<?=$id?>" class="btn btn-danger btn-sm"> <span class="bi-trash3-fill">&nbsp;</button>
+                                    
+                                    <button  onclick="return confirm('Tem certeza que deseja excluir?')" type="submit" name="delete_usuario" value="<?=$id?>" class="btn btn-danger btn-sm"><span class="bi-trash3-fill"></button>
                                 </form>
                             </td>
                         </tr>

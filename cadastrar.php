@@ -18,7 +18,7 @@
             </section>
             <section>
                 <p>Email: </p>
-                <input type="text" name="email" placeholder="@email.com" required>
+                <input type="email" name="email" placeholder="@email.com" required>
             </section>
             <section>
                 <p>Senha: </p>
