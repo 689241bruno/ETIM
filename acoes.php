@@ -29,4 +29,18 @@ if(isset($_POST['salvar_usuario'])){
     
 }
 
+if(isset($_POST['confirmar_usuario'])){
+    $senha = trim($_POST['senha']);
+    $email = trim($_POST['email']);
+    $id = $_POST['id'];
+    try{
+        $usuario->entrarUsuario($email, $senha);
+        echo "<script>alert('Usuario confirmador com sucesso!');
+        window.location.href = 'editar.php?id=$id';</script>";
+    }catch (\Throwable $e){
+        echo "<script>alert('Error ao confirmar usuario!');</script>" . $e;
+    }
+    
+}
+
 ?>
